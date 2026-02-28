@@ -148,15 +148,25 @@
             <h2 class="text-4xl font-bold text-white mb-6">Ready to upgrade your practice?</h2>
             <p class="text-xl text-slate-400 mb-12">Let's discuss how we can tailor this architecture to your specific brand and workflow.</p>
             
-            <div class="flex flex-col sm:flex-row justify-center gap-6">
-                <a href="https://wa.me/5491153165655" target="_blank" class="flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-4 rounded-full transition shadow-lg shadow-emerald-900/50">
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+                
+                <a href="https://wa.me/5491153165655" target="_blank" class="flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-4 rounded-full transition shadow-lg shadow-emerald-900/50 w-full sm:w-auto">
                     <i data-lucide="message-square" class="w-5 h-5"></i>
                     Message on WhatsApp
                 </a>
-                <a href="mailto:ortigozaignacio20@gmail.com" class="flex items-center justify-center gap-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-bold px-8 py-4 rounded-full transition">
-                    <i data-lucide="mail" class="w-5 h-5"></i>
-                    Send an Email
-                </a>
+                
+                <div class="relative flex flex-col items-center w-full sm:w-auto">
+                    <button onclick="copyToClipboard()" class="flex items-center justify-center gap-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-bold px-8 py-4 rounded-full transition w-full sm:w-auto group cursor-pointer" title="Copy to clipboard">
+                        <i data-lucide="mail" class="w-5 h-5 text-brand-cyan"></i>
+                        <span id="emailToCopy" class="tracking-wide">ortigozaignacio20@gmail.com</span>
+                        <i data-lucide="copy" class="w-4 h-4 text-slate-400 group-hover:text-white transition"></i>
+                    </button>
+                    
+                    <span id="copyMessage" class="absolute -bottom-8 text-brand-cyan text-sm font-semibold opacity-0 transition-opacity duration-300 whitespace-nowrap">
+                        Copied to clipboard!
+                    </span>
+                </div>
+
             </div>
         </div>
     </section>
@@ -168,6 +178,24 @@
     <script>
         // Inicializar iconos de Lucide
         lucide.createIcons();
+    </script>
+    <script>
+        // Inicializar iconos de Lucide
+        lucide.createIcons();
+
+        // Función para copiar el correo
+        function copyToClipboard() {
+            const email = document.getElementById("emailToCopy").innerText;
+            navigator.clipboard.writeText(email).then(() => {
+                const msg = document.getElementById("copyMessage");
+                msg.classList.remove("opacity-0");
+                setTimeout(() => {
+                    msg.classList.add("opacity-0");
+                }, 2000);
+            }).catch(err => {
+                console.error('Error al copiar el texto: ', err);
+            });
+        }
     </script>
 </body>
 </html>
